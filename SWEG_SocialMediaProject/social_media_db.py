@@ -1,11 +1,8 @@
 import sqlite3
 
 def initialize_db():
-    # Connect to SQLite database
     conn = sqlite3.connect('social_media.db')
     cursor = conn.cursor()
-
-    # Create a table to store social media posts
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS posts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,38 +11,56 @@ def initialize_db():
             user TEXT
         )
     ''')
-
-    # Commit changes and close the connection
     conn.commit()
     conn.close()
 
-def insert_posts(posts):
-    # Connect to SQLite database
+def insert_post(post):
     conn = sqlite3.connect('social_media.db')
     cursor = conn.cursor()
-
-    # Insert posts into the database
-    for post in posts:
-        cursor.execute('''
-            INSERT INTO posts (image, text, user) VALUES (?, ?, ?)
-        ''', (post['image'], post['text'], post['user']))
-
-    # Commit changes and close the connection
+    cursor.execute('''
+        INSERT INTO posts (image, text, user) VALUES (?, ?, ?)
+    ''', (post['image'], post['text'], post['user']))
+    post_id = cursor.lastrowid
     conn.commit()
     conn.close()
+    return post_id
 
 def get_latest_post():
-    # Connect to SQLite database
     conn = sqlite3.connect('social_media.db')
     cursor = conn.cursor()
-
-    # Retrieve the latest post
     cursor.execute('''
         SELECT * FROM posts ORDER BY id DESC LIMIT 1
     ''')
-    latest_post = cursor.fetchone()
-
-    # Close the connection
+    post = cursor.fetchone()
     conn.close()
+    return post
 
-    return latest_post
+def search_db_posts(user=None, text=None):
+    conn = sqlite3.connect('social_media.db')
+    cursor = conn.cursor()
+    
+    query = 'SELECT * FROM posts WHERE 1=1'
+    params = []
+    
+    if user:
+        query += ' AND user = ?'
+        params.append(user)
+    if text:
+        query += ' AND text LIKE ?'
+        params.append(f'%{text}%')
+    
+    cursor.execute(query, params)
+    posts = cursor.fetchall()
+    conn.close()
+    
+    return [{'id': post[0], 'image': post[1], 'text': post[2], 'user': post[3]} for post in posts]
+
+def get_post_by_id(post_id):
+    conn = sqlite3.connect('social_media.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT * FROM posts WHERE id = ?
+    ''', (post_id,))
+    post = cursor.fetchone()
+    conn.close()
+    return post
