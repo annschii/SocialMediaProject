@@ -14,7 +14,7 @@ def resize_image(image_path, target_size=(500, 500)):
 
 def show_image(image_path, user, text):
     root = tk.Tk()
-    root.title("NAME OF OUR APP??????????")
+    root.title("Social Media for Salsa cats enthusiasts")
 
     # Set the window size and make it non-resizable
     window_width = 500
@@ -44,7 +44,7 @@ def show_image(image_path, user, text):
     frame.place(relx=0.5, rely=0.5, anchor="center")
 
     # Load a user icon image (replace 'path/to/user_icon.png' with the actual path)
-    user_icon_path = 'images/user_icon.png'
+    user_icon_path = '/Users/apatecpetschnig/Technikum_2023/SocialMediaProject/SWEG_SocialMediaProject/images/user_icon.png'
     user_icon = Image.open(user_icon_path)
     user_icon = user_icon.resize((30, 30))  # Resize the icon if needed
     tk_user_icon = ImageTk.PhotoImage(user_icon)
@@ -74,7 +74,7 @@ def main():
     initialize_db()
 
     # Define the path to the directory containing your images
-    images_directory = 'posts'
+    images_directory = '/Users/apatecpetschnig/Technikum_2023/SocialMediaProject/SWEG_SocialMediaProject/posts'
 
     # Get a list of image files in the directory
     image_files = [f for f in os.listdir(images_directory) if f.endswith(('.jpg', '.jpeg', '.png'))]
