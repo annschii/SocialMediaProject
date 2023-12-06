@@ -4,27 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media App</title>
+    <title>SECRET</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+
+        * {
             margin: 0;
-            padding: 20px;
-            background: #f4f4f4;
-            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
         }
 
-        h1, h2 {
-            margin-bottom: 20px;
+        body {
+            display: flex;
+            background: #4d0f0c;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .secretTitle {
+            position: relative;
+        }
+
+        .secretTitle h2 {
+            color: #fff;
+            font-size: 12em;
+            position: absolute;
+            transform: translate(-10%, -100%);
+        }
+
+        .secretTitle h2:nth-child(1) {
+            color: transparent;
+            -webkit-text-stroke: 2px #87000e;
+        }
+
+        .secretTitle h2:nth-child(2) {
+            color: #fb082b;
+            animation: animate 4s ease-in-out infinite;
+        }
+
+        @keyframes animate {
+          0%,
+          100% {
+            clip-path: polygon(
+              0% 45%,
+              16% 44%,
+              33% 50%,
+              54% 60%,
+              70% 61%,
+              84% 59%,
+              100% 52%,
+              100% 100%,
+              0% 100%
+            );
+          }
+
+          50% {
+            clip-path: polygon(
+              0% 60%,
+              15% 65%,
+              34% 66%,
+              51% 62%,
+              67% 50%,
+              84% 45%,
+              100% 46%,
+              100% 100%,
+              0% 100%
+            );
+          }
         }
 
         button {
-            background-color: #61dafb;
-            color: #fff;
-            padding: 10px 20px;
+            background-color: transparent;
+            padding: 10px 10px;
             border: none;
             cursor: pointer;
-            font-size: 16px;
             border-radius: 5px;
             margin: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -33,110 +88,30 @@
         }
 
         button:hover {
-            background-color: #4fa3d1;
+            background-color: #8F6B00;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="file"] {
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            width: 80%;
-        }
-
-        form {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        label {
-            display: block;
-            margin-top: 20px;
-        }
     </style>
 </head>
 
 <body>
-    <h1>Secret Social Media App</h1>
+    <section>
+        <div class="secretTitle">
+            <h2>secret</h2>
+            <h2>secret</h2>
+        </div>
+    </section>
 
-    <h2>Users</h2>
-    <button onclick="getAllUsers()">Get All Users</button>
-    <ul id="users"></ul>
+    <section>
+        <div class="mainButtons">
+            <button onclick="window.location.href='html/createUser.html'"><img src="images/icons/create_user_icon.png" alt="Create User Icon" width="50" height="50" data-legend="HII"></button>
+            <button onclick="window.location.href='html/updateUser.html'"><img src="images/icons/update_user_icon.png" alt="Update User Icon" width="50" height="50"></button>
+            <button onclick="window.location.href='html/deleteUser.html'"><img src="images/icons/delete_user_icon.png" alt="Delete User Icon" width="50" height="50"></button>
+            <button onclick="window.location.href='html/createPost.html'"><img src="images/icons/create_post_icon.png" alt="Create Post Icon" width="50" height="50"></button>
+            <button onclick="window.location.href='html/searchPost.html'"><img src="images/icons/search_post_icon.png" alt="Search Post Icon" width="50" height="50"></button>
+        </div>
+    </section>
 
-    <h2>Create User</h2>
-    <form id="createUserForm" onsubmit="createUser(event)">
-        <input type="text" id="createUsername" name="createUsername" placeholder="Username" required>
-        <input type="text" id="createFirstName" name="createFirstName" placeholder="First Name" required>
-        <input type="text" id="createLastName" name="createLastName" placeholder="Last Name" required>
-        <input type="email" id="createEmail" name="createEmail" placeholder="Email" required>
-        <button type="submit">Create User</button>
-    </form>
-
-    <h2>Update User</h2>
-    <form id="updateUserForm" onsubmit="updateUser(event)">
-        <input type="text" id="updateUserId" name="updateUserId" placeholder="User ID" required>
-        <input type="text" id="updateUsername" name="updateUsername" placeholder="New Username">
-        <input type="text" id="updateFirstName" name="updateFirstName" placeholder="New First Name">
-        <input type="text" id="updateLastName" name="updateLastName" placeholder="New Last Name">
-        <input type="email" id="updateEmail" name="updateEmail" placeholder="New Email">
-        <button type="submit">Update User</button>
-    </form>
-
-    <h2>Delete User</h2>
-    <form id="deleteUserForm" onsubmit="deleteUser(event)">
-        <input type="text" id="deleteUserId" name="deleteUserId" placeholder="User ID" required>
-        <button type="submit">Delete User</button>
-    </form>
-
-    <h2>Posts</h2>
-	<form id="postSearchForm" onsubmit="searchPosts(event)">
-        <label for="postId">Post ID:</label>
-        <input type="text" id="postId" name="postId">
-        <label for="userId">User ID:</label>
-        <input type="text" id="userId" name="userId">
-        <label for="text">Text:</label>
-        <input type="text" id="text" name="text">
-        <button type="submit">Search Posts</button>
-    </form>
-    <table id="posts">
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Text</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-
-    <h2>Create Post</h2>
-    <form id="createPostForm" onsubmit="createPost(event)">
-        <input type="text" id="postUserId" name="postUserId" placeholder="User ID" required>
-        <input type="text" id="postText" name="postText" placeholder="Post Text" required>
-        <input type="file" id="postImage" name="postImage" placeholder="Post Image" accept="image/*" required>
-        <button type="submit">Create Post</button>
-    </form>
 
     <script>
         const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL

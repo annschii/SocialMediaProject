@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+
+    <style>
+        * {
+            background: #4d0f0c;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #61dafb;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #4fa3d1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"] {
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 80%;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+<body>
+ <h2>Create User</h2>
+    <form id="createUserForm" onsubmit="createUser(event)">
+        <input type="text" id="createUsername" name="createUsername" placeholder="Username" required>
+        <input type="text" id="createFirstName" name="createFirstName" placeholder="First Name" required>
+        <input type="text" id="createLastName" name="createLastName" placeholder="Last Name" required>
+        <input type="email" id="createEmail" name="createEmail" placeholder="Email" required>
+        <button type="submit">Create User</button>
+    </form>
+</body>
+</html>
