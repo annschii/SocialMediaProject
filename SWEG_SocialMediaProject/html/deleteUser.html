@@ -20,44 +20,69 @@
             margin-bottom: 20px;
         }
 
-        button {
-            background-color: #61dafb;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
+        h1 {
+            font-family: "Poppins", sans-serif;
+            font-size: 2em;
+            color: transparent;
+            -webkit-text-stroke: 2px #87000e;
+        }
+
+        h2 {
+            font-family: "Poppins", sans-serif;
+            font-size: 2em;
+            position: relative;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            margin: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
-            outline: none;
         }
 
-        button:hover {
-            background-color: #4fa3d1;
+        .secretTitle h2 {
+            color: #fff;
+            font-size: 2em;
+            position: absolute;
+            transform: translate(-10%, -100%);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .secretTitle h2:nth-child(1) {
+            color: transparent;
+            -webkit-text-stroke: 2px #87000e;
         }
 
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
+        .secretTitle h2:nth-child(2) {
+            color: #fb082b;
+            animation: animate 4s ease-in-out infinite;
         }
 
-        th {
-            background-color: #4CAF50;
-            color: white;
+        @keyframes animate {
+          0%,
+          100% {
+            clip-path: polygon(
+              0% 45%,
+              16% 44%,
+              33% 50%,
+              54% 60%,
+              70% 61%,
+              84% 59%,
+              100% 52%,
+              100% 100%,
+              0% 100%
+            );
+          }
+
+          50% {
+            clip-path: polygon(
+              0% 60%,
+              15% 65%,
+              34% 66%,
+              51% 62%,
+              67% 50%,
+              84% 45%,
+              100% 46%,
+              100% 100%,
+              0% 100%
+            );
+          }
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="file"] {
+        input[type="text"] {
             padding: 10px;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -73,19 +98,72 @@
             align-items: center;
         }
 
-        label {
-            display: block;
-            margin-top: 20px;
+        #btn {
+            background: #222;
+            height: 50px;
+            min-width: 150px;
+            border: none;
+            border-radius: 10px;
+            color: #eee;
+            font-size: 40px;
+            font-family: 'Cookie', cursive;
+            position: relative;
+            transition: 1s;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding-top: 5px;
         }
+
+        #btn #circle {
+            width: 5px;
+            height: 5px;
+            background: transparent;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            overflow: hidden;
+            transition: 500ms;
+        }
+
+        .noselect {
+          -webkit-touch-callout: none;
+            -webkit-user-select: none;
+             -khtml-user-select: none;
+               -moz-user-select: none;
+                -ms-user-select: none;
+                    user-select: none;
+        }
+
+        #btn:hover {
+            background: transparent;
+        }
+
+        #btn:hover #circle {
+            height: 50px;
+            width: 150px;
+            left: 0;
+            border-radius: 0;
+            border-bottom: 2px solid #eee;
+        }
+
     </style>
 
 
 </head>
 <body>
-<h2>Delete User</h2>
+    <div class="secretTitle">
+        <h2 class="title" onclick="window.location.href='../main.html'">secret</h2>
+        <h2>secret</h2>
+    </div>
+
+    <h1>Delete User</h1>
     <form id="deleteUserForm" onsubmit="deleteUser(event)">
         <input type="text" id="deleteUserId" name="deleteUserId" placeholder="User ID" required>
-        <button type="submit">Delete User</button>
+        <div id="btn"><button class="noselect" type="submit">Delete User</button><div id="circle"></div></div>
     </form>
 
 <script>
