@@ -95,7 +95,7 @@
         }
 
         th {
-            background-color: #4CAF50;
+            background-color: black;
             color: white;
         }
 
@@ -108,6 +108,11 @@
             border-radius: 5px;
             border: 1px solid #ddd;
             width: 80%;
+        }
+
+        .userInput {
+            font-family: "Poppins", sans-serif;
+            color: white;
         }
 
         form {
@@ -185,12 +190,13 @@
 
 	<form id="postSearchForm" onsubmit="searchPosts(event)">
         <label for="postId">Post ID:</label>
-        <input type="text" id="postId" name="postId">
+        <input class="userInput" type="text" id="postId" name="postId">
         <label for="userId">User ID:</label>
-        <input type="text" id="userId" name="userId">
+        <input class="userInput" type="text" id="userId" name="userId">
         <label for="text">Text:</label>
-        <input type="text" id="text" name="text">
-        <div id="btn"><button class="noselect" type="submit">Search Posts</button><div id="circle"></div></div>
+        <input class="userInput" type="text" id="text" name="text">
+        <!-- <section id="btn"><button class="noselect" type="submit">Search Post</button><div id="circle"></div></section> -->
+        <button type="submit">Search Post</button>
     </form>
     <table id="posts">
         <thead>
@@ -203,7 +209,7 @@
     </table>
 
 <script>
-        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+        const baseUrl = 'http://localhost:5000';
 
         async function getAllPosts() {
             const response = await fetch(`${baseUrl}/posts`);

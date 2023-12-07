@@ -91,6 +91,11 @@
             width: 80%;
         }
 
+        .userInput {
+            font-family: "Poppins", sans-serif;
+            color: white;
+        }
+
         form {
             margin-top: 20px;
             display: flex;
@@ -162,12 +167,13 @@
 
     <h1>Delete User</h1>
     <form id="deleteUserForm" onsubmit="deleteUser(event)">
-        <input type="text" id="deleteUserId" name="deleteUserId" placeholder="User ID" required>
-        <div id="btn"><button class="noselect" type="submit">Delete User</button><div id="circle"></div></div>
+        <input class="userInput" type="text" id="deleteUserId" name="deleteUserId" placeholder="User ID" required>
+        <!-- <section id="btn"><button class="noselect" type="submit">Delete User</button><div id="circle"></div></section> -->
+        <button type="submit">Delete User</button>
     </form>
 
 <script>
-        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+        const baseUrl = 'http://localhost:5000';
 
         async function deleteUser(event) {
             event.preventDefault();

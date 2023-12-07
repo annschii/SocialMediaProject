@@ -99,6 +99,11 @@
             width: 80%;
         }
 
+        .userInput {
+            font-family: "Poppins", sans-serif;
+            color: white;
+        }
+
         form {
             margin-top: 20px;
             display: flex;
@@ -216,22 +221,23 @@
 
     <h1>Update User</h1>
     <form id="updateUserForm" onsubmit="updateUser(event)">
-        <input type="text" id="updateUserId" name="updateUserId" placeholder="User ID" required>
-        <input type="text" id="updateUsername" name="updateUsername" placeholder="New Username">
-        <input type="text" id="updateFirstName" name="updateFirstName" placeholder="New First Name">
-        <input type="text" id="updateLastName" name="updateLastName" placeholder="New Last Name">
-        <input type="email" id="updateEmail" name="updateEmail" placeholder="New Email">
-        <div id="btn2"><button class="noselect" type="submit">Update User</button><div id="circle2"></div></div>
+        <input class="userInput" type="text" id="updateUserId" name="updateUserId" placeholder="User ID" required>
+        <input class="userInput" type="text" id="updateUsername" name="updateUsername" placeholder="New Username">
+        <input class="userInput" type="text" id="updateFirstName" name="updateFirstName" placeholder="New First Name">
+        <input class="userInput" type="text" id="updateLastName" name="updateLastName" placeholder="New Last Name">
+        <input class="userInput" type="email" id="updateEmail" name="updateEmail" placeholder="New Email">
+        <!-- <section id="btn"><button class="noselect" type="submit">Update User</button><div id="circle"></div></section> -->
+        <button type="submit">Update User</button>
     </form>
 
         <script>
-        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+        const baseUrl = 'http://localhost:5000';
 
         async function getAllUsers() {
             const response = await fetch(`${baseUrl}/users`);
             const users = await response.json();
             const usersList = document.getElementById('users');
-            usersList.innerHTML = users.map(user => `<li>${user.username}: ${user.first_name} ${user.last_name}, ${user.email}</li>`).join('');
+            usersList.innerHTML = users.map(user => `<li>${user.id}: ${user.username} ${user.first_name} ${user.last_name}, ${user.email}</li>`).join('');
         }
 
         async function updateUser(event) {

@@ -93,6 +93,11 @@
             width: 80%;
         }
 
+        .userInput {
+            font-family: "Poppins", sans-serif;
+            color: white;
+        }
+
         form {
             margin-top: 20px;
             display: flex;
@@ -100,57 +105,6 @@
             align-items: center;
         }
 
-        #btn {
-            background: #222;
-            height: 50px;
-            min-width: 150px;
-            border: none;
-            border-radius: 10px;
-            color: #eee;
-            font-size: 40px;
-            font-family: 'Cookie', cursive;
-            position: relative;
-            transition: 1s;
-            -webkit-tap-highlight-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding-top: 5px;
-        }
-
-        #btn #circle {
-            width: 5px;
-            height: 5px;
-            background: transparent;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            overflow: hidden;
-            transition: 500ms;
-        }
-
-        .noselect {
-          -webkit-touch-callout: none;
-            -webkit-user-select: none;
-             -khtml-user-select: none;
-               -moz-user-select: none;
-                -ms-user-select: none;
-                    user-select: none;
-        }
-
-        #btn:hover {
-            background: transparent;
-        }
-
-        #btn:hover #circle {
-            height: 50px;
-            width: 150px;
-            left: 0;
-            border-radius: 0;
-            border-bottom: 2px solid #eee;
-        }
     </style>
 
 
@@ -164,14 +118,15 @@
     <h1>Create Post</h1>
 
     <form id="createPostForm" onsubmit="createPost(event)">
-        <input type="text" id="postUserId" name="postUserId" placeholder="User ID" required>
-        <input type="text" id="postText" name="postText" placeholder="Post Text" required>
+        <input class="userInput" type="text" id="postUserId" name="postUserId" placeholder="User ID" required>
+        <input class="userInput" type="text" id="postText" name="postText" placeholder="Post Text" required>
         <input type="file" id="postImage" name="postImage" placeholder="Post Image" accept="image/*" required>
-        <div id="btn"><button class="noselect" type="submit">Create Post</button><div id="circle"></div></div>
+        <!-- <section id="btn"><button class="noselect" type="submit">Create Post</button><div id="circle"></div></section> -->
+        <button type="submit">Create Post</button>
     </form>
 
 <script>
-        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+        const baseUrl = 'http://localhost:5000';
 
 
         async function createPost(event) {

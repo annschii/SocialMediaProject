@@ -95,6 +95,11 @@
             width: 80%;
         }
 
+        .userInput {
+            font-family: "Poppins", sans-serif;
+            color: white;
+        }
+
         form {
             margin-top: 20px;
             display: flex;
@@ -165,15 +170,17 @@
     <h1>Create User</h1>
 
     <form id="createUserForm" onsubmit="createUser(event)">
-        <input type="text" id="createUsername" name="createUsername" placeholder="Username" required>
-        <input type="text" id="createFirstName" name="createFirstName" placeholder="First Name" required>
-        <input type="text" id="createLastName" name="createLastName" placeholder="Last Name" required>
-        <input type="email" id="createEmail" name="createEmail" placeholder="Email" required>
-        <div id="btn"><button class="noselect" type="submit">Create User</button><div id="circle"></div></div>
+        <input class="userInput" type="text" id="createUsername" name="createUsername" placeholder="Username" required>
+        <input class="userInput" type="text" id="createFirstName" name="createFirstName" placeholder="First Name" required>
+        <input class="userInput" type="text" id="createLastName" name="createLastName" placeholder="Last Name" required>
+        <input class="userInput" type="email" id="createEmail" name="createEmail" placeholder="Email" required>
+        <!-- <section id="btn"><button class="noselect" type="submit">Create User</button><div id="circle"></div></section> -->
+        <button type="submit">Create User</button>
+
     </form>
 
     <script>
-        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+        const baseUrl = 'http://localhost:5000';
 
         async function createUser(event) {
             event.preventDefault();
