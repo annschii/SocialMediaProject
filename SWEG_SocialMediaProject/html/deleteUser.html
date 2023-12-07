@@ -87,5 +87,27 @@
         <input type="text" id="deleteUserId" name="deleteUserId" placeholder="User ID" required>
         <button type="submit">Delete User</button>
     </form>
+
+<script>
+        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+
+        async function deleteUser(event) {
+            event.preventDefault();
+            const userId = document.getElementById('deleteUserId').value;
+            const response = await fetch(`${baseUrl}/users/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                console.log('User deleted successfully');
+                alert('User deleted successfully!');
+                getAllUsers(); // Refresh the user list
+            } else {
+                console.error('Failed to delete user:', response.statusText);
+            }
+        }
+
+
+</script>
 </body>
 </html>

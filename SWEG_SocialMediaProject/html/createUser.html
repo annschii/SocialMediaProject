@@ -89,5 +89,39 @@
         <input type="email" id="createEmail" name="createEmail" placeholder="Email" required>
         <button type="submit">Create User</button>
     </form>
+
+    <script>
+        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+
+        async function createUser(event) {
+            event.preventDefault();
+            const username = document.getElementById('createUsername').value;
+            const firstName = document.getElementById('createFirstName').value;
+            const lastName = document.getElementById('createLastName').value;
+            const email = document.getElementById('createEmail').value;
+
+            const response = await fetch(`${baseUrl}/users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username,
+                    first_name: firstName,
+                    last_name: lastName,
+                    email,
+                }),
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                console.log('Created User:', user);
+                alert('User created successfully!');
+                searchPosts(event); // Refresh the user list
+            } else {
+                console.error('Failed to create user:', response.statusText);
+            }
+        }
+    </script>
 </body>
 </html>

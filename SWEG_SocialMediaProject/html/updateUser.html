@@ -78,8 +78,6 @@
             margin-top: 20px;
         }
     </style>
-
-
 </head>
 <body>
 <h2>Users</h2>
@@ -95,5 +93,48 @@
         <input type="email" id="updateEmail" name="updateEmail" placeholder="New Email">
         <button type="submit">Update User</button>
     </form>
+
+        <script>
+        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+
+        async function getAllUsers() {
+            const response = await fetch(`${baseUrl}/users`);
+            const users = await response.json();
+            const usersList = document.getElementById('users');
+            usersList.innerHTML = users.map(user => `<li>${user.username}: ${user.first_name} ${user.last_name}, ${user.email}</li>`).join('');
+        }
+
+        async function updateUser(event) {
+        event.preventDefault();
+        const userId = document.getElementById('updateUserId').value;
+        const username = document.getElementById('updateUsername').value;
+        const firstName = document.getElementById('updateFirstName').value;
+        const lastName = document.getElementById('updateLastName').value;
+        const email = document.getElementById('updateEmail').value;
+
+        const response = await fetch(`${baseUrl}/users/${userId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username,
+                first_name: firstName,
+                last_name: lastName,
+                email,
+            }),
+        });
+
+        if (response.ok) {
+            const updatedUser = await response.json();
+            console.log('Updated User:', updatedUser);
+            alert('User updated successfully!');
+            getAllUsers(); // Refresh the user list
+        } else {
+            console.error('Failed to update user:', response.statusText);
+                }
+        }
+
+        </script>
 </body>
 </html>

@@ -99,5 +99,84 @@
         </thead>
         <tbody></tbody>
     </table>
+
+<script>
+        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+
+        async function getAllPosts() {
+            const response = await fetch(`${baseUrl}/posts`);
+            const posts = await response.json();
+            const postsList = document.getElementById('posts');
+            postsList.innerHTML = posts.map(post => `<li>${post.text}</li>`).join('');
+        }
+
+        async function searchPosts(event) {
+            event.preventDefault();
+
+            const postId = document.getElementById('postId').value;
+            const userId = document.getElementById('userId').value;
+            const text = document.getElementById('text').value;
+
+            const queryParams = new URLSearchParams();
+            if (postId) queryParams.append('id', postId);
+            if (userId) queryParams.append('user_id', userId);
+            if (text) queryParams.append('text', text);
+
+            const response = await fetch(`${baseUrl}/posts?${queryParams}`);
+            const postsData = await response.json(); // Change variable name to postsData
+
+            const postsTableBody = document.querySelector('#posts tbody');
+            postsTableBody.innerHTML = postsData.map(post => `
+                <tr>
+                    <td>${post.user}</td>
+                    <td>${post.text}</td>
+                </tr>
+            `).join('');
+
+            // Fetch and display images
+            displayPosts(postsData);
+        }
+
+
+        async function displayPosts(posts) {
+            const postsTableBody = document.querySelector('#posts tbody');
+            postsTableBody.innerHTML = '';
+
+            for (const post of posts) {
+                const row = document.createElement('tr');
+
+                // Display user and text
+                const userCell = document.createElement('td');
+                userCell.textContent = post.user;
+                row.appendChild(userCell);
+
+                const textCell = document.createElement('td');
+                textCell.textContent = post.text;
+                row.appendChild(textCell);
+
+                // Fetch and display the image
+                const imageResponse = await fetch(`${baseUrl}/images/${post.image}`);
+                if (imageResponse.ok) {
+                    const imageBlob = await imageResponse.blob();
+                    const imageUrl = URL.createObjectURL(imageBlob);
+
+                    const imageCell = document.createElement('td');
+                    const imageElement = document.createElement('img');
+                    imageElement.src = imageUrl;
+                    imageElement.alt = 'Post Image';
+                    imageElement.style.maxWidth = '100px';  // Adjust the size as needed
+                    imageCell.appendChild(imageElement);
+                    row.appendChild(imageCell);
+                } else {
+                    console.error('Failed to fetch image:', imageResponse.statusText);
+                }
+
+                postsTableBody.appendChild(row);
+            }
+        }
+
+
+</script>
+
 </body>
 </html>

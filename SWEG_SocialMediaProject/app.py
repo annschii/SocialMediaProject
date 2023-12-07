@@ -8,12 +8,13 @@ from social_media_db import (
     insert_post, get_post_by_id, get_all_posts, update_post, delete_post,
     insert_user, get_all_users, get_user_by_id, update_user, delete_user
 )
-from flask_cors import CORS  
+from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app,origins=["http://localhost:8000","*"]) #for development
 
-UPLOAD_FOLDER = 'C:\\Users\\elisa\\Source\\Repos\\SocialMediaProject\\SWEG_SocialMediaProject'
+CORS(app, origins=["http://localhost:8000", "*"]) #for development
+
+UPLOAD_FOLDER = 'C:\\Users\\bjkev\\Documents\\GitHub\\SocialMediaProject\\SWEG_SocialMediaProject'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -64,7 +65,7 @@ def update_post_full(post_id):
         return jsonify(updated_post), 200
     else:
         abort(400)
-      
+
 @app.route('/posts/<int:post_id>', methods=['DELETE'])
 def delete_post_endpoint(post_id):
     if delete_post(post_id):
@@ -81,7 +82,7 @@ def upload_image():
         return jsonify({'message': 'No selected file'}), 400
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'],'images',filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'images', filename)
         file.save(file_path)
         return jsonify({'image_url': filename}), 201
     else:
@@ -89,7 +90,7 @@ def upload_image():
 
 @app.route('/images/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'],'images'), filename)
+    return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], 'images'), filename)
 
 @app.route('/users', methods=['GET'])
 def list_users():
@@ -98,7 +99,7 @@ def list_users():
     first_name = request.args.get('first_name')
     last_name = request.args.get('last_name')
     email = request.args.get('email')
-    
+
     filter_params = {k: v for k, v in request.args.items() if v is not None}
     users = get_all_users(filter_params)
     return jsonify(users), 200
@@ -126,7 +127,7 @@ def update_user_partial(user_id):
     existing_user = get_user_by_id(user_id)
     if not existing_user:
         abort(404)
-    
+
     updated_user = {**existing_user, **user_data}
     if update_user(user_id, updated_user):
         return jsonify(updated_user), 200
@@ -138,7 +139,7 @@ def update_user_full(user_id):
     user_data = request.get_json()
     if not get_user_by_id(user_id):
         abort(404)
-    
+
     if update_user(user_id, user_data):
         return jsonify(user_data), 200
     else:

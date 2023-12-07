@@ -89,5 +89,56 @@
         <input type="file" id="postImage" name="postImage" placeholder="Post Image" accept="image/*" required>
         <button type="submit">Create Post</button>
     </form>
+
+<script>
+        const baseUrl = 'http://localhost:5000'; // Update with your actual backend URL
+
+
+        async function createPost(event) {
+            event.preventDefault();
+            const userId = document.getElementById('postUserId').value;
+            const text = document.getElementById('postText').value;
+            const imageInput = document.getElementById('postImage');
+            const imageFile = imageInput.files[0];
+
+            const formData = new FormData();
+            formData.append('file', imageFile);
+
+            const imageUploadResponse = await fetch(`${baseUrl}/images`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (imageUploadResponse.ok) {
+                const imageData = await imageUploadResponse.json();
+                const imagePath = imageData.image_url;
+
+                const postResponse = await fetch(`${baseUrl}/posts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        text: text,
+                        image: imagePath,
+                    }),
+                });
+
+                if (postResponse.ok) {
+                    const post = await postResponse.json();
+                    console.log('Created Post:', post);
+                    alert('Post created successfully!');
+                    searchPosts(event); // Refresh the posts list
+                } else {
+                    console.error('Failed to create post:', postResponse.statusText);
+                }
+            } else {
+                console.error('Failed to upload image:', imageUploadResponse.statusText);
+            }
+        }
+
+
+</script>
 </body>
 </html>
