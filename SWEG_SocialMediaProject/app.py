@@ -14,10 +14,7 @@ app = Flask(__name__)
 
 CORS(app, origins=["http://localhost:8000", "*"]) #for development
 
-UPLOAD_FOLDER = 'C:\\Users\\bjkev\\Documents\\GitHub\\SocialMediaProject\\SWEG_SocialMediaProject'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -82,7 +79,7 @@ def upload_image():
         return jsonify({'message': 'No selected file'}), 400
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'images', filename)
+        file_path = os.path.join('/app/images', filename)
         file.save(file_path)
         return jsonify({'image_url': filename}), 201
     else:
@@ -90,7 +87,7 @@ def upload_image():
 
 @app.route('/images/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], 'images'), filename)
+    return send_from_directory('/app/images', filename)
 
 @app.route('/users', methods=['GET'])
 def list_users():
@@ -153,4 +150,5 @@ def delete_user_endpoint(user_id):
         abort(404)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.run(host='0.0.0.0',port=5000, debug=True) #the port must be specified when using docker
