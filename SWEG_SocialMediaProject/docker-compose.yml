@@ -1,0 +1,38 @@
+# docker-compose.yml
+
+version: '3'
+services:
+  # SQLite database service
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: socialmedia
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - social_media_app
+
+  # Python application service
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/socialmedia
+    volumes:
+      - app_images:/app/images
+    networks:
+      - social_media_app
+
+volumes:
+  db_data:
+  app_images:
+
+networks:
+  social_media_app:
