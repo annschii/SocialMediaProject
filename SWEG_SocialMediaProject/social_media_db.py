@@ -160,7 +160,7 @@ def get_user_by_id(user_id):
     cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))
     user = cursor.fetchone()
     conn.close()
-    return dict(user) if user else None
+    return dict(zip([desc[0] for desc in cursor.description], user)) if user else None
 
 
 def update_user(user_id, updated_user):
