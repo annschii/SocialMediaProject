@@ -2,183 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search Post</title>
+    <link rel="stylesheet" type="text/css" href="css/searchPost.css" />
+    <title>POSTS</title>
 
-    <style>
-        * {
-            background: #4d0f0c;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h1, h2 {
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-family: "Poppins", sans-serif;
-            font-size: 2em;
-            color: transparent;
-            -webkit-text-stroke: 2px #87000e;
-        }
-
-        h2 {
-            font-family: "Poppins", sans-serif;
-            font-size: 2em;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .secretTitle h2 {
-            color: #fff;
-            font-size: 2em;
-            position: absolute;
-            transform: translate(-10%, -100%);
-        }
-
-        .secretTitle h2:nth-child(1) {
-            color: transparent;
-            -webkit-text-stroke: 2px #87000e;
-        }
-
-        .secretTitle h2:nth-child(2) {
-            color: #fb082b;
-            animation: animate 4s ease-in-out infinite;
-        }
-
-        @keyframes animate {
-          0%,
-          100% {
-            clip-path: polygon(
-              0% 45%,
-              16% 44%,
-              33% 50%,
-              54% 60%,
-              70% 61%,
-              84% 59%,
-              100% 52%,
-              100% 100%,
-              0% 100%
-            );
-          }
-
-          50% {
-            clip-path: polygon(
-              0% 60%,
-              15% 65%,
-              34% 66%,
-              51% 62%,
-              67% 50%,
-              84% 45%,
-              100% 46%,
-              100% 100%,
-              0% 100%
-            );
-          }
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-
-        th {
-            background-color: black;
-            color: white;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="file"] {
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            width: 80%;
-        }
-
-        .userInput {
-            font-family: "Poppins", sans-serif;
-            color: white;
-        }
-
-        form {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        label {
-            display: block;
-            margin-top: 20px;
-        }
-
-        #btn {
-            background: #222;
-            height: 50px;
-            min-width: 150px;
-            border: none;
-            border-radius: 10px;
-            color: #eee;
-            font-size: 40px;
-            font-family: 'Cookie', cursive;
-            position: relative;
-            transition: 1s;
-            -webkit-tap-highlight-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding-top: 5px;
-        }
-
-        #btn #circle {
-            width: 5px;
-            height: 5px;
-            background: transparent;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            overflow: hidden;
-            transition: 500ms;
-        }
-
-        .noselect {
-          -webkit-touch-callout: none;
-            -webkit-user-select: none;
-             -khtml-user-select: none;
-               -moz-user-select: none;
-                -ms-user-select: none;
-                    user-select: none;
-        }
-
-        #btn:hover {
-            background: transparent;
-        }
-
-        #btn:hover #circle {
-            height: 50px;
-            width: 150px;
-            left: 0;
-            border-radius: 0;
-            border-bottom: 2px solid #eee;
-        }
-    </style>
 </head>
 <body>
     <div class="secretTitle">
@@ -186,17 +12,17 @@
         <h2>secret</h2>
     </div>
 
-    <h1>Posts</h1>
+    <h1>POSTS</h1>
 
 	<form id="postSearchForm" onsubmit="searchPosts(event)">
-        <label for="postId">Post ID:</label>
-        <input class="userInput" type="text" id="postId" name="postId">
-        <label for="userId">User ID:</label>
-        <input class="userInput" type="text" id="userId" name="userId">
-        <label for="text">Text:</label>
-        <input class="userInput" type="text" id="text" name="text">
+        <label for="postId"></label>
+        <input class="userInput" type="text" id="postId" name="postId" placeholder="Post ID">
+        <label for="userId"></label>
+        <input class="userInput" type="text" id="userId" name="userId" placeholder="User ID">
+        <label for="text"></label>
+        <input class="userInput" type="text" id="text" name="text" placeholder="Text">
         <!-- <section id="btn"><button class="noselect" type="submit">Search Post</button><div id="circle"></div></section> -->
-        <button type="submit">Search Post</button>
+        <button class="custom-btn btn" type="submit">Search Post</button>
     </form>
     <table id="posts">
         <thead>
@@ -272,7 +98,7 @@
                     const imageElement = document.createElement('img');
                     imageElement.src = imageUrl;
                     imageElement.alt = 'Post Image';
-                    imageElement.style.maxWidth = '100px';  // Adjust the size as needed
+                    imageElement.classList.add('clickable-image'); // Add a class for easy selection
                     imageCell.appendChild(imageElement);
                     row.appendChild(imageCell);
                 } else {
@@ -281,10 +107,46 @@
 
                 postsTableBody.appendChild(row);
             }
+
+            // Add event listener to all images with the 'clickable-image' class
+            document.querySelectorAll('.clickable-image').forEach(image => {
+                image.addEventListener('click', openImageModal);
+            });
         }
 
+        let modal; // Declare a variable to store the modal element
+
+        function openImageModal(event) {
+            const clickedImage = event.target;
+
+            // Check if the modal is already created, if not, create it
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.classList.add('image-modal');
+
+                // Create an image element inside the modal
+                const modalImage = document.createElement('img');
+                modalImage.alt = 'Enlarged Image';
+                modal.appendChild(modalImage);
+
+                // Add a click event listener to close the modal on click
+                modal.addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                    modal = null; // Reset the modal variable
+                });
+            }
+
+            // Set the source of the modal image
+            modal.querySelector('img').src = clickedImage.src;
+
+            // Add modal to the document body if it's not already added
+            if (!document.contains(modal)) {
+                document.body.appendChild(modal);
+            }
+        }
 
 </script>
 
 </body>
 </html>
+

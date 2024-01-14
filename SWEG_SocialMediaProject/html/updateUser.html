@@ -2,211 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update User</title>
+    <link rel="stylesheet" type="text/css" href="css/updateUser.css" />
+    <title>UPDATE USER</title>
 
-    <style>
-        * {
-            background: #4d0f0c;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h1, h2 {
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-family: "Poppins", sans-serif;
-            font-size: 2em;
-            color: transparent;
-            -webkit-text-stroke: 2px #87000e;
-        }
-
-        h2 {
-            font-family: "Poppins", sans-serif;
-            font-size: 2em;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .secretTitle h2 {
-            color: #fff;
-            font-size: 2em;
-            position: absolute;
-            transform: translate(-10%, -100%);
-        }
-
-        .secretTitle h2:nth-child(1) {
-            color: transparent;
-            -webkit-text-stroke: 2px #87000e;
-        }
-
-        .secretTitle h2:nth-child(2) {
-            color: #fb082b;
-            animation: animate 4s ease-in-out infinite;
-        }
-
-        @keyframes animate {
-          0%,
-          100% {
-            clip-path: polygon(
-              0% 45%,
-              16% 44%,
-              33% 50%,
-              54% 60%,
-              70% 61%,
-              84% 59%,
-              100% 52%,
-              100% 100%,
-              0% 100%
-            );
-          }
-
-          50% {
-            clip-path: polygon(
-              0% 60%,
-              15% 65%,
-              34% 66%,
-              51% 62%,
-              67% 50%,
-              84% 45%,
-              100% 46%,
-              100% 100%,
-              0% 100%
-            );
-          }
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="file"] {
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            width: 80%;
-        }
-
-        .userInput {
-            font-family: "Poppins", sans-serif;
-            color: white;
-        }
-
-        form {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #btn {
-            background: #222;
-            height: 50px;
-            min-width: 150px;
-            border: none;
-            border-radius: 10px;
-            color: #eee;
-            font-size: 40px;
-            font-family: 'Cookie', cursive;
-            position: relative;
-            transition: 1s;
-            -webkit-tap-highlight-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding-top: 5px;
-        }
-
-        #btn #circle {
-            width: 5px;
-            height: 5px;
-            background: transparent;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            overflow: hidden;
-            transition: 500ms;
-        }
-
-        .noselect {
-          -webkit-touch-callout: none;
-            -webkit-user-select: none;
-             -khtml-user-select: none;
-               -moz-user-select: none;
-                -ms-user-select: none;
-                    user-select: none;
-        }
-
-        #btn:hover {
-            background: transparent;
-        }
-
-        #btn:hover #circle {
-            height: 50px;
-            width: 150px;
-            left: 0;
-            border-radius: 0;
-            border-bottom: 2px solid #eee;
-        }
-
-        #btn2 {
-            background: #222;
-            height: 50px;
-            min-width: 150px;
-            border: none;
-            border-radius: 10px;
-            color: #eee;
-            font-size: 40px;
-            font-family: 'Cookie', cursive;
-            position: relative;
-            transition: 1s;
-            -webkit-tap-highlight-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding-top: 5px;
-        }
-
-        #btn2 #circle2 {
-            width: 5px;
-            height: 5px;
-            background: transparent;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            overflow: hidden;
-            transition: 500ms;
-        }
-
-        #btn2:hover {
-            background: transparent;
-        }
-
-        #btn2:hover #circle2 {
-            height: 50px;
-            width: 150px;
-            left: 0;
-            border-radius: 0;
-            border-bottom: 2px solid #eee;
-        }
-
-    </style>
 </head>
 <body>
     <div class="secretTitle">
@@ -214,20 +12,21 @@
         <h2>secret</h2>
     </div>
 
-    <h1>Users</h1>
+    <h1>USERS</h1>
 
-    <div id="btn"><button class="noselect" onclick="getAllUsers()">Get All Users</button><div id="circle"></div></div>
-    <ul id="users"></ul>
+    <div id="btn"><button class="noselect custom-btn btn" onclick="getAllUsers()">Get All Users</button><div id="circle"></div></div>
+    <div id="users"></div>
 
-    <h1>Update User</h1>
+    <h1>UPDATE USER</h1>
     <form id="updateUserForm" onsubmit="updateUser(event)">
         <input class="userInput" type="text" id="updateUserId" name="updateUserId" placeholder="User ID" required>
         <input class="userInput" type="text" id="updateUsername" name="updateUsername" placeholder="New Username">
         <input class="userInput" type="text" id="updateFirstName" name="updateFirstName" placeholder="New First Name">
         <input class="userInput" type="text" id="updateLastName" name="updateLastName" placeholder="New Last Name">
         <input class="userInput" type="email" id="updateEmail" name="updateEmail" placeholder="New Email">
+        <input class="userInput" type="password" id="updatePassword" name="updatePassword" placeholder="New Password">
         <!-- <section id="btn"><button class="noselect" type="submit">Update User</button><div id="circle"></div></section> -->
-        <button type="submit">Update User</button>
+        <button class="custom-btn btn2" type="submit">Update User</button>
     </form>
 
         <script>
@@ -237,7 +36,7 @@
             const response = await fetch(`${baseUrl}/users`);
             const users = await response.json();
             const usersList = document.getElementById('users');
-            usersList.innerHTML = users.map(user => `<li>${user.id}: ${user.username} ${user.first_name} ${user.last_name}, ${user.email}</li>`).join('');
+            usersList.innerHTML = users.map(user => `<li>USER ${user.id}: ${user.username}, ${user.first_name} ${user.last_name}, ${user.email}</li>`).join('');
         }
 
         async function updateUser(event) {
@@ -247,6 +46,7 @@
         const firstName = document.getElementById('updateFirstName').value;
         const lastName = document.getElementById('updateLastName').value;
         const email = document.getElementById('updateEmail').value;
+        const password = document.getElementById('updatePassword').value;
 
         const response = await fetch(`${baseUrl}/users/${userId}`, {
             method: 'PATCH',
@@ -258,6 +58,7 @@
                 first_name: firstName,
                 last_name: lastName,
                 email,
+                password,
             }),
         });
 

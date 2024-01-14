@@ -9,7 +9,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DATABASE_NAME = os.environ.get("DATABASE_NAME")
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@db:5432/socialmedia")
+
 
 def get_db_connection():
     conn = psycopg2.connect(DATABASE_URL)
