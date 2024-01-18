@@ -14,14 +14,6 @@ def analyze_sentiment():
 
     return jsonify({'sentiment': sentiment['label']})
 
-def provisional_sentiment_analysis(text):
-    # Placeholder for provisional sentiment analysis
-    # You can replace this with a more sophisticated model later
-    return 'positive'  # Placeholder sentiment result
-
-
-
 if __name__ == '__main__':
-    #app.run(debug=True)
     app.run(host='0.0.0.0',port=5000, debug=True) #otherwise it does not work for me
 
