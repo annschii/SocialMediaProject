@@ -3,7 +3,7 @@
 from flask import Flask, request, jsonify, send_from_directory, abort
 from werkzeug.utils import secure_filename
 import os
-from social_media_db import (
+from SWEG_SocialMediaProject.social_media_db import (
     initialize_db,
     insert_post, get_post_by_id, get_all_posts, update_post, delete_post,
     insert_user, get_all_users, get_user_by_id, update_user, delete_user
@@ -96,6 +96,7 @@ def list_users():
     first_name = request.args.get('first_name')
     last_name = request.args.get('last_name')
     email = request.args.get('email')
+    password = request.args.get('password')
 
     filter_params = {k: v for k, v in request.args.items() if v is not None}
     users = get_all_users(filter_params)

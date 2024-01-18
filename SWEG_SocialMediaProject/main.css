@@ -1,0 +1,239 @@
+/*═══════════════════════════IMPORT═════════════════════════════*/
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+
+/*═══════════════════════════GENERAL═════════════════════════════*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    background: #4d0f0c;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+/*═══════════════════════════TITLE═════════════════════════════*/
+.secretTitle {
+    position: relative;
+}
+
+.secretTitle h2 {
+    color: #fff;
+    font-size: 12em;
+    position: absolute;
+    transform: translate(-10%, -100%);
+}
+
+.secretTitle h2:nth-child(1) {
+    color: transparent;
+    -webkit-text-stroke: 2px #87000e;
+}
+
+.secretTitle h2:nth-child(2) {
+    color: #fb082b;
+    animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    clip-path: polygon(
+      0% 45%,
+      16% 44%,
+      33% 50%,
+      54% 60%,
+      70% 61%,
+      84% 59%,
+      100% 52%,
+      100% 100%,
+      0% 100%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      0% 60%,
+      15% 65%,
+      34% 66%,
+      51% 62%,
+      67% 50%,
+      84% 45%,
+      100% 46%,
+      100% 100%,
+      0% 100%
+    );
+  }
+}
+
+/*═══════════════════════════BUTTONS═════════════════════════════*/
+.mainButtons {
+    background-color: transparent;
+    padding: 10px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+.mainButtons:hover {
+    /*background-color: #8F6B00;*/
+    background-color: #fb082b;
+}
+
+/*═══════════════════════════BUTTON ONE═════════════════════════════*/
+.btn1 {
+    position: relative;
+    display: inline-block;
+}
+
+.btn1 .toolTipText {
+    visibility: hidden;
+    width: 120px;
+    top: 100%;
+    left: 50%;
+
+    color: #fff;
+    text-align: center;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    padding: 5px 0;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.btn1:hover .toolTipText {
+  visibility: visible;
+}
+
+/*═══════════════════════════BUTTON TWO═════════════════════════════*/
+.btn2 {
+    position: relative;
+    display: inline-block;
+}
+
+.btn2 .toolTipText {
+    visibility: hidden;
+    width: 120px;
+    top: 100%;
+    left: 50%;
+
+    color: #fff;
+    text-align: center;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    padding: 5px 0;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.btn2:hover .toolTipText {
+  visibility: visible;
+}
+
+/*═══════════════════════════BUTTON THREE═════════════════════════════*/
+.btn3 {
+    position: relative;
+    display: inline-block;
+}
+
+.btn3 .toolTipText {
+    visibility: hidden;
+    width: 120px;
+    top: 100%;
+    left: 50%;
+
+    color: #fff;
+    text-align: center;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    padding: 5px 0;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.btn3:hover .toolTipText {
+  visibility: visible;
+}
+
+/*═══════════════════════════BUTTON TWO═════════════════════════════*/
+.btn4 {
+    position: relative;
+    display: inline-block;
+}
+
+.btn4 .toolTipText {
+    visibility: hidden;
+    width: 120px;
+    top: 100%;
+    left: 50%;
+
+    color: #fff;
+    text-align: center;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    padding: 5px 0;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.btn4:hover .toolTipText {
+  visibility: visible;
+}
+
+/*═══════════════════════════BUTTON TWO═════════════════════════════*/
+.btn5 {
+    position: relative;
+    display: inline-block;
+}
+
+.btn5 .toolTipText {
+    visibility: hidden;
+    width: 120px;
+    top: 100%;
+    left: 50%;
+
+    color: #fff;
+    text-align: center;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    padding: 5px 0;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.btn5:hover .toolTipText {
+  visibility: visible;
+}
+
+/*═══════════════════════════BUTTON LOGIN═════════════════════════════*/
+.loginButton {
+    background-color: transparent;
+    padding: 10px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 20px 200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    outline: none;
+    align-items: center;
+
+}
+
+loginButton:hover {
+    /*background-color: #8F6B00;*/
+    background-color: #fb082b;
+}
