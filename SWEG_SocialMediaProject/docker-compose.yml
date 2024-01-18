@@ -25,7 +25,7 @@ services:
       - db
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/socialmedia
-      SENTIMENT_URL: http://sentiment/
+      SENTIMENT_URL: http://sentiment:5000/
     volumes:
       - app_images:/app/images
     networks:

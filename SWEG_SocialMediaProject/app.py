@@ -47,9 +47,6 @@ def send_sentiment_analysis_request(text):
         print(f"Exception: {str(e)}")
         return None
 
-# Example usage:
-sentiment_result = send_sentiment_analysis_request(text_to_analyze)
-
 
 
 def allowed_file(filename):
