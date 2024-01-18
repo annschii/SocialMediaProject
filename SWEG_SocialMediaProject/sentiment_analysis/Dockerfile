@@ -22,5 +22,5 @@ EXPOSE 80
 ENV NAME World
 
 # Run sentiment_service.py when the container launches
-CMD ["python", "sentiment_service.py"]
+CMD ["python", "sentiment_analysis.py"]
 

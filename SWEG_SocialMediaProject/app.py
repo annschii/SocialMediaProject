@@ -3,6 +3,7 @@
 from flask import Flask, request, jsonify, send_from_directory, abort
 from werkzeug.utils import secure_filename
 import os
+import time
 from social_media_db import (
     initialize_db,
     insert_post, get_post_by_id, get_all_posts, update_post, delete_post,
@@ -55,7 +56,12 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-initialize_db()
+for i in range(10):
+    try:
+        initialize_db()
+        break
+    except:
+        time.sleep(20)
 
 @app.route('/posts', methods=['GET'])
 def list_posts():
