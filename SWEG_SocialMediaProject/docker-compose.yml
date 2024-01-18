@@ -2,7 +2,7 @@
 
 version: '3'
 services:
-  # SQLite database service
+  # Postgres database service
   db:
     image: postgres:latest
     environment:
@@ -25,8 +25,16 @@ services:
       - db
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/socialmedia
+      SENTIMENT_URL: http://sentiment/
     volumes:
       - app_images:/app/images
+    networks:
+      - social_media_app
+
+  sentiment:
+    build:
+      context: ./sentiment_analysis
+      dockerfile: Dockerfile
     networks:
       - social_media_app
 

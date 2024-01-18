@@ -9,12 +9,47 @@ from social_media_db import (
     insert_user, get_all_users, get_user_by_id, update_user, delete_user
 )
 from flask_cors import CORS
+import requests
 
 app = Flask(__name__)
 
 CORS(app, origins=["http://localhost:8000", "*"]) #for development
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+SENTIMENT_URL = os.environ.get("SENTIMENT_URL")
+
+
+#define function to send request to sentiment_analyzer
+def send_sentiment_analysis_request(text):
+    # Set the URL based on the SENTIMENT_URL environment variable
+    sentiment_url = SENTIMENT_URL + "analyze_sentiment"  # Replace with your actual endpoint if different
+
+    # Prepare the payload for the POST request
+    payload = {'text': text}
+
+    try:
+        # Send the POST request to the sentiment analysis API
+        response = requests.post(sentiment_url, json=payload)
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Parse and return the sentiment result
+            result = response.json()
+            return result['sentiment']
+        else:
+            # Handle unsuccessful request
+            print(f"Error: {response.status_code}, {response.text}")
+            return None
+    except Exception as e:
+        # Handle exceptions, e.g., network errors
+        print(f"Exception: {str(e)}")
+        return None
+
+# Example usage:
+sentiment_result = send_sentiment_analysis_request(text_to_analyze)
+
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -32,6 +67,7 @@ def list_posts():
 def create_new_post():
     post_data = request.get_json()
     post_id = insert_post(post_data)
+    sentiment_result = send_sentiment_analysis_request(post_data['text'])
     if post_id:
         return jsonify({"id": post_id, **post_data}), 201
     else:

@@ -1,0 +1,16 @@
+
+#start docker 
+
+open --background -a Docker
+
+#navigate to the folder where the project is saved and build the docker image
+
+docker build -t my-sentiment-analysis-microservice .
+
+
+#create container
+
+docker run -p 5000:5000 my-sentiment-analysis-microservice
+
+# run the micro service 
+curl -X POST -H "Content-Type: application/json" -d '{"text": "Your text here"}' http://127.0.0.1:5000/analyze_sentiment
