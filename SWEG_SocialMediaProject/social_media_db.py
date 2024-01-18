@@ -10,6 +10,7 @@ load_dotenv()
 
 DATABASE_NAME = os.environ.get("DATABASE_NAME")
 DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@db:5432/socialmedia")
+#DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5433/test_database")
 
 
 def get_db_connection():
